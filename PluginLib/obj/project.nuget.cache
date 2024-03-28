@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "9ng6w4GqmamSKWvMBbIdKanB18U7VIMXu4GUacno20xwOva+wjJV4EiyaCXEe+j06MK2yzTKIzRjX61Q+GzX5A==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Savr\\source\\repos\\ConsoleApp2\\PluginLib\\PluginLib.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Savr\\.nuget\\packages\\microsoft.win32.systemevents\\8.0.0\\microsoft.win32.systemevents.8.0.0.nupkg.sha512",
+    "C:\\Users\\Savr\\.nuget\\packages\\system.drawing.common\\8.0.3\\system.drawing.common.8.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

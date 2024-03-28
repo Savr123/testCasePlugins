@@ -1,3 +1,5 @@
 .vs
 ConsoleApp2/
 ClassLibrary1/
+PluginLib/obj
+PluginLib/bin

@@ -1,10 +1,9 @@
 ﻿using System.Drawing;
-using System.Drawing.Imaging;
 
 namespace CustomPlugin
 {
     [Serializable]
-    public class CustomPlugin : PluginLib.IPlugin
+    public class CustomPlugin
     {
         public CustomPlugin()
         {

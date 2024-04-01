@@ -5,34 +5,6 @@ using System.Reflection;
 
 namespace PluginLib
 {
-    //public class SumPlugin : IPlugin
-    //{
-    //    public string PluginName => "SumPlugin";
-
-    //    public string Version;
-
-    //    public Image Image;
-
-    //    public string Description;
-
-    //    public int Run(int input1, int input2)
-    //    {
-    //        throw new NotImplementedException();
-    //    }
-    //}
-
-    //public class DividePlugin: IPlugin
-    //{
-
-    //}
-
-    //public class SubstractPlugin: IPlugin
-    //{
-
-    //}
-
-
-
     public interface IPlugin
     {
         string PluginName { get; set; }
@@ -70,15 +42,9 @@ namespace PluginLib
         public string TypeName { get; set; }
     }
 
-    public class MultiplyPlugin : Plugin
+    public class PluginTypeConfig
     {
-        public override string PluginName { get; set; }
-        public override string Version { get; set; }
-        public override string Description { get; set; }
-
-        public override int Run(int input1, int input2)
-        {
-            return input1 * input2;
-        }
+        public string PluginName { get; set; }
+        public string TypeName { get; set; }
     }
 }

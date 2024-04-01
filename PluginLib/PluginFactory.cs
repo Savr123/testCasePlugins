@@ -23,14 +23,15 @@ namespace PluginLib
         /// <summary>
         /// Возвращает общее колличество зарегистрированных плагинов
         /// </summary>
-        public int PluginsCount { 
+        public int PluginsCount 
+        { 
             get 
             {
                 return _pluginDictionary.Count;
             }
         }
 
-        private List<PluginConfig> LoadPluginConfigsFromJSON()
+        private List<PluginTypeConfig> LoadPluginConfigsFromJSON()
         {
 
             // Specify the path to your JSON file
@@ -39,7 +40,7 @@ namespace PluginLib
             // Read JSON data from file
             string json = File.ReadAllText(filePath);
 
-            List<PluginConfig> pluginList = JsonConvert.DeserializeObject<List<PluginConfig>>(json);
+            List<PluginTypeConfig> pluginList = JsonConvert.DeserializeObject<List<PluginTypeConfig>>(json);
             return pluginList;
         }
 
@@ -66,6 +67,8 @@ namespace PluginLib
             foreach (var item in pluginConfigs)
             {
                 Type type = Type.GetType("PluginLib." + item.TypeName);
+                //TODO: вынести строку с неймспейсом либо в константу либо по умнее что-то 
+
                 RegisterPlugin(item.PluginName, type);
             }
         }
@@ -79,6 +82,9 @@ namespace PluginLib
         /// <exception cref="ArgumentException"> - возвращается ошибка, если полученный тип не реализует интерфейс IPlugin</exception>
         public void RegisterPlugin(string pluginName, Type pluginType)
         {
+            if (pluginType == null)
+                throw new ArgumentNullException();
+
             if (!pluginType.GetInterfaces().Contains(typeof(IPlugin)))
                 throw new ArgumentException("given plugin type {0} do not implement IPlugin interface", pluginType.Name);
 
@@ -93,6 +99,10 @@ namespace PluginLib
         /// <exception cref="ArgumentException"> - возвращается в случае если не плагин не зарегистрирован, либо 
         /// не удалось создать плагин по иным причинам
         /// </exception>
+        public IPlugin CreatePlugin(DefaultPlugins pluginName)
+        {
+            return CreatePlugin(pluginName.ToString());
+        }
         public IPlugin CreatePlugin(string pluginName)
         {
             if (!_pluginDictionary.ContainsKey(pluginName))
@@ -117,9 +127,19 @@ namespace PluginLib
         {
             var plugin = CreatePlugin(pluginName);
             plugin.Version = config.Version;
+            //TODO: создавать плагины и в то же время их конфигурировать
 
             return plugin;
         }
+
+        public enum DefaultPlugins
+        {
+            MultiplyPlugin,
+            SumPlugin,
+            SubstructPlugin,
+            DividePlugin,
+        }
+
     }
 
     interface IPluginFactory

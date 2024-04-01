@@ -39,13 +39,8 @@ namespace PluginLib
         /// <returns>
         /// Возвращает список конфигураций плагинов
         /// </returns>
-        private List<PluginConfig> LoadPluginConfigsFromJSON()
+        private List<PluginConfig> LoadPluginConfigsFromJSON(string filePath)
         {
-
-            // Specify the path to your JSON file
-            string filePath = "plugins.json";
-
-            // Read JSON data from file
             string json = File.ReadAllText(filePath);
 
             List<PluginConfig> pluginList = JsonConvert.DeserializeObject<List<PluginConfig>>(json);
@@ -70,25 +65,44 @@ namespace PluginLib
                 return _instance;
             }
         }
-
+        
         /// <summary>
         /// Добавляет в список все типы плагинов, которые можно будет создать используя фабрику
         /// </summary>
-        public void Init()
+        public void Init(string filePath = "plugins.json")
         {
-            var pluginConfigs = LoadPluginConfigsFromJSON();
-
-            foreach (var item in pluginConfigs)
-            {
-                Type type = Type.GetType("PluginLib." + item.TypeName);
-                //TODO: вынести строку с неймспейсом либо в константу либо по умнее что-то 
-
-                RegisterPlugin(item.PluginName, type);
-            }
+            if (!string.IsNullOrEmpty(filePath))
+                RegisterFromFile(filePath);
 
             Plugins.Instance.RegisterPlugin("CustomPlugin", (new CustomPluginAdapter()).GetType());
         }
 
+        /// <summary>
+        /// Регистриует все плагины, записанные в json'е по типам
+        /// </summary>
+        /// <param name="filePath"> - путь к файлу с информацией о плагинах</param>
+        public void RegisterFromFile(string filePath)
+        {
+            if (!File.Exists(filePath))
+                return;
+
+            try 
+            {
+                var pluginConfigs = LoadPluginConfigsFromJSON(filePath);
+
+                foreach (var item in pluginConfigs)
+                {
+                    Type type = Type.GetType("PluginLib." + item.TypeName);
+                    //TODO: вынести строку с неймспейсом либо в константу либо по умнее что-то 
+
+                    RegisterPlugin(item.PluginName, type);
+                }
+            }catch (Exception ex)
+            {
+                //Нужно бы логировать ошибки
+                throw;
+            }
+        }
 
         /// <summary>
         /// Регистрирует новый тип плагина, который можно создать.

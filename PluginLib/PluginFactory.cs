@@ -1,10 +1,12 @@
-﻿using System.Drawing;
-using System.Collections.Generic;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
+using CustomPlugin;
+
 
 namespace PluginLib
 {
-
+    /// <summary>
+    /// Фабрика по созданию плагинов
+    /// </summary>
     public class Plugins : IPluginFactory
     {
         private Dictionary<string, Type> _pluginDictionary = new Dictionary<string, Type>();
@@ -31,7 +33,13 @@ namespace PluginLib
             }
         }
 
-        private List<PluginTypeConfig> LoadPluginConfigsFromJSON()
+        /// <summary>
+        /// Подгрузить информацию о плагинах из файлика json
+        /// </summary>
+        /// <returns>
+        /// Возвращает список конфигураций плагинов
+        /// </returns>
+        private List<PluginConfig> LoadPluginConfigsFromJSON()
         {
 
             // Specify the path to your JSON file
@@ -40,13 +48,16 @@ namespace PluginLib
             // Read JSON data from file
             string json = File.ReadAllText(filePath);
 
-            List<PluginTypeConfig> pluginList = JsonConvert.DeserializeObject<List<PluginTypeConfig>>(json);
+            List<PluginConfig> pluginList = JsonConvert.DeserializeObject<List<PluginConfig>>(json);
             return pluginList;
         }
 
         private static Plugins _instance;
         private static readonly object _lockObj = new object();
 
+        /// <summary>
+        /// Синглтон, сущность фабрики
+        /// </summary>
         public static Plugins Instance
         {
             get
@@ -60,6 +71,9 @@ namespace PluginLib
             }
         }
 
+        /// <summary>
+        /// Добавляет в список все типы плагинов, которые можно будет создать используя фабрику
+        /// </summary>
         public void Init()
         {
             var pluginConfigs = LoadPluginConfigsFromJSON();
@@ -125,7 +139,7 @@ namespace PluginLib
         /// <exception cref="ArgumentException"> - возвращается в случае если не плагин не зарегистрирован, либо 
         /// не удалось создать плагин по иным причинам
         /// </exception>
-        public IPlugin CreatePlugin(string pluginName, IPluginConfig config)
+        public IPlugin CreatePlugin(string pluginName, PluginConfigExpanded config)
         {
             var plugin = CreatePlugin(pluginName);
             plugin.Version = config.Version;
@@ -134,6 +148,9 @@ namespace PluginLib
             return plugin;
         }
 
+        /// <summary>
+        /// перечисление плагинов из коробки
+        /// </summary>
         public enum DefaultPlugins
         {
             MultiplyPlugin,
@@ -144,6 +161,9 @@ namespace PluginLib
 
     }
 
+    /// <summary>
+    /// Интерфейс фабрики плагинов
+    /// </summary>
     interface IPluginFactory
     {
         void RegisterPlugin(string pluginName, Type pluginType);

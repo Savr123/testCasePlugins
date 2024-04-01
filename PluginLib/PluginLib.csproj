@@ -41,4 +41,8 @@
     <Folder Include="Resources\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CustomPlugin\CustomPlugin.csproj" />
+  </ItemGroup>
+
 </Project>

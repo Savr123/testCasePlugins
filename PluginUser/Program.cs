@@ -13,6 +13,7 @@ namespace PluginUser
 
             Console.WriteLine(plugin.Run(1, 2));
             Console.WriteLine(customPlugin.Run(1, 2));
+            Console.ReadLine();
         }
     }
 }

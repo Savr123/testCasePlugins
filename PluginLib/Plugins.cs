@@ -1,5 +1,8 @@
 ﻿namespace PluginLib
 {
+    /// <summary>
+    /// Плагин для реализации умножения
+    /// </summary>
     public class MultiplyPlugin : Plugin
     {
         public override string PluginName { get; set; }
@@ -12,7 +15,9 @@
         }
     }
 
-
+    /// <summary>
+    /// плагин для реализации сложения
+    /// </summary>
     public class SumPlugin : Plugin
     {
         public override string PluginName { get; set; }
@@ -27,6 +32,9 @@
         }
     }
 
+    /// <summary>
+    /// плагин для реализации деления
+    /// </summary>
     public class DividePlugin : Plugin
     {
         public override string PluginName { get; set; }
@@ -39,6 +47,9 @@
         }
     }
 
+    /// <summary>
+    /// плагин для реализации вычитания
+    /// </summary>
     public class SubstructPlugin : Plugin
     {
         public override string PluginName { get; set; }

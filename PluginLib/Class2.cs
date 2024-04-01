@@ -1,6 +1,7 @@
 ﻿using System.Drawing;
 using System.Collections.Generic;
 using System.Text.Json;
+using System.Reflection;
 
 namespace PluginLib
 {
@@ -8,11 +9,11 @@ namespace PluginLib
     //{
     //    public string PluginName => "SumPlugin";
 
-    //    public string Version => throw new NotImplementedException();
+    //    public string Version;
 
-    //    public Image Image => throw new NotImplementedException();
+    //    public Image Image;
 
-    //    public string Description => throw new NotImplementedException();
+    //    public string Description;
 
     //    public int Run(int input1, int input2)
     //    {
@@ -34,11 +35,19 @@ namespace PluginLib
 
     public interface IPlugin
     {
-        string PluginName { get; }
-        string Version { get; }
-        System.Drawing.Image Image { get; }
-        string Description { get; }
+        string PluginName { get; set; }
+        string Version { get; set; }
+        System.Drawing.Image Image { get;}
+        string Description { get; set; }
         int Run(int input1, int input2);
+    }
+
+    public interface IPluginConfig
+    {
+        string PluginName { get; set; }
+        string Version { get; set; }
+        string Description { get; set; }
+        string TypeName { get; set; }
     }
 
     public abstract class Plugin : IPlugin
@@ -47,27 +56,29 @@ namespace PluginLib
         public abstract string Version { get; set; }
         public abstract string Description { get; set; }
 
-        public Image Image => null;
+        public virtual Image Image => Properties.Resources.pluginImage;
 
-        public int Run(int input1, int input2)
-        {
-            return input1 * input2;
-        }
+        public abstract int Run(int input1, int input2);
     }
 
-    public class MultiplyPlugin :IPlugin
+    public class PluginConfig : IPluginConfig
     {
-        public string PluginName { get; set; }
+        public string PluginName { get ; set; }
         public string Version { get; set; }
+        public string Image { get; set; }
         public string Description { get; set; }
+        public string TypeName { get; set; }
+    }
 
-        public Image Image => null;
+    public class MultiplyPlugin : Plugin
+    {
+        public override string PluginName { get; set; }
+        public override string Version { get; set; }
+        public override string Description { get; set; }
 
-        public int Run(int input1, int input2)
+        public override int Run(int input1, int input2)
         {
             return input1 * input2;
         }
     }
-
-
 }

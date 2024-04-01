@@ -6,7 +6,7 @@ namespace PluginUser
     {
         static void Main(string[] args)
         {
-            Plugins.Instance.LoadPlugins();
+            Plugins.Instance.Init();
 
             Console.WriteLine("Hello world!");
         }

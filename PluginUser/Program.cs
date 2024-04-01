@@ -1,6 +1,4 @@
 ﻿using PluginLib;
-using System.Reflection;
-using System.Xml.Serialization;
 
 namespace PluginUser
 {
@@ -11,7 +9,6 @@ namespace PluginUser
             Plugins.Instance.Init();
 
             IPlugin plugin = Plugins.Instance.CreatePlugin(Plugins.DefaultPlugins.MultiplyPlugin);
-            Plugins.Instance.RegisterPlugin("CustomPlugin", (new CustomPlugin.CustomPlugin()).GetType());
             IPlugin customPlugin = Plugins.Instance.CreatePlugin("CustomPlugin");
 
             Console.WriteLine(plugin.Run(1, 2));

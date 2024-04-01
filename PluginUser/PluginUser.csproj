@@ -8,7 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CustomPlugin\CustomPlugin.csproj" />
     <ProjectReference Include="..\PluginLib\PluginLib.csproj" />
   </ItemGroup>
 

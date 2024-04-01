@@ -71,6 +71,8 @@ namespace PluginLib
 
                 RegisterPlugin(item.PluginName, type);
             }
+
+            Plugins.Instance.RegisterPlugin("CustomPlugin", (new CustomPluginAdapter()).GetType());
         }
 
 

@@ -1,13 +1,13 @@
 ﻿using System.Drawing;
 using System.Collections.Generic;
-using System.Text.Json;
+using Newtonsoft.Json;
 
 namespace PluginLib
 {
 
     public class Plugins : IPluginFactory
     {
-        private Dictionary<string, Type> _plugins = new Dictionary<string, Type>();
+        private Dictionary<string, Type> _pluginDictionary = new Dictionary<string, Type>();
 
         /// <summary>
         /// Возвращает список плагинов для создания.
@@ -16,13 +16,57 @@ namespace PluginLib
         {
             get
             {
-                return _plugins.Keys.ToArray<string>();
+                return _pluginDictionary.Keys.ToArray<string>();
             }
         }
 
-        int PluginsCount { get 
+        /// <summary>
+        /// Возвращает общее колличество зарегистрированных плагинов
+        /// </summary>
+        public int PluginsCount { 
+            get 
             {
-                return _plugins.Count;
+                return _pluginDictionary.Count;
+            }
+        }
+
+        private List<PluginConfig> LoadPluginConfigsFromJSON()
+        {
+
+            // Specify the path to your JSON file
+            string filePath = "plugins.json";
+
+            // Read JSON data from file
+            string json = File.ReadAllText(filePath);
+
+            List<PluginConfig> pluginList = JsonConvert.DeserializeObject<List<PluginConfig>>(json);
+            return pluginList;
+        }
+
+        private static Plugins _instance;
+        private static readonly object _lockObj = new object();
+
+        public static Plugins Instance
+        {
+            get
+            {
+                if(_instance == null )
+                    lock(_lockObj)
+                        if(_instance ==null)
+                            _instance = new Plugins();
+
+                return _instance;
+            }
+        }
+
+        public void Init()
+        {
+            var pluginConfigs = LoadPluginConfigsFromJSON();
+
+            foreach (var item in pluginConfigs)
+            {
+                Type type = Type.GetType("PluginLib." + item.TypeName);
+                RegisterPlugin(item.PluginName, type);
             }
         }
 
@@ -38,7 +82,7 @@ namespace PluginLib
             if (!pluginType.GetInterfaces().Contains(typeof(IPlugin)))
                 throw new ArgumentException("given plugin type {0} do not implement IPlugin interface", pluginType.Name);
 
-            _plugins.Add(pluginName, pluginType);
+            _pluginDictionary.Add(pluginName, pluginType);
         }
 
         /// <summary>
@@ -51,10 +95,10 @@ namespace PluginLib
         /// </exception>
         public IPlugin CreatePlugin(string pluginName)
         {
-            if (!_plugins.ContainsKey(pluginName))
+            if (!_pluginDictionary.ContainsKey(pluginName))
                 throw new ArgumentException(string.Format("Plugin name {0} not found", pluginName));
 
-            if (Activator.CreateInstance(_plugins[pluginName]) is IPlugin createdPlugin)
+            if (Activator.CreateInstance(_pluginDictionary[pluginName]) is IPlugin createdPlugin)
                 return createdPlugin;
 
             throw new ArgumentException($"Plugin {pluginName} is not created. Invalid type received.");
@@ -69,15 +113,12 @@ namespace PluginLib
         /// <exception cref="ArgumentException"> - возвращается в случае если не плагин не зарегистрирован, либо 
         /// не удалось создать плагин по иным причинам
         /// </exception>
-        public IPlugin CreatePlugin(string pluginName, params object?[]? args)
+        public IPlugin CreatePlugin(string pluginName, IPluginConfig config)
         {
-            if (!_plugins.ContainsKey(pluginName))
-                throw new ArgumentException(string.Format("Plugin name {0} not found", pluginName));
+            var plugin = CreatePlugin(pluginName);
+            plugin.Version = config.Version;
 
-            if (Activator.CreateInstance(_plugins[pluginName], args) is IPlugin createdPlugin)
-                return createdPlugin;
-
-            throw new ArgumentException($"Plugin {pluginName} is not created. Invalid type received.");
+            return plugin;
         }
     }
 

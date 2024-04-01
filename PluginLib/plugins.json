@@ -2,31 +2,25 @@
   {
     "PluginName": "MultiplyPlugin",
     "Version": "1.0",
-    "Image": null,
-    "Description": "Multiplying two numbers"
+    "Description": "Multiplying two numbers",
+    "TypeName": "MultiplyPlugin"
   },
   {
     "PluginName": "SumPlugin",
     "Version": "1.0",
-    "Image": null,
-    "Description": "Sum two numbers"
+    "Description": "Sum two numbers",
+    "TypeName": "SumPlugin"
   },
   {
     "PluginName": "SubstractPlugin",
     "Version": "1.0",
-    "Image": null,
-    "Description": "Substract two numbers"
+    "Description": "Substract two numbers",
+    "TypeName": "SubstructPlugin"
   },
   {
     "PluginName": "DividePlugin",
     "Version": "1.0",
-    "Image": null,
-    "Description": "Divide two numbers"
+    "Description": "Divide two numbers",
+    "TypeName": "DividePlugin"
   },
-  {
-    "PluginName": "IncrementPlugin",
-    "Version": "1.0",
-    "Image": null,
-    "Description": "Increment number by 1"
-  }
 ]

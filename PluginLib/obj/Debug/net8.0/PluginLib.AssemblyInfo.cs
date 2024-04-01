@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PluginLib")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2ba2253d01a7378e27f4aebffc7bae6e98c145e4")]
 [assembly: System.Reflection.AssemblyProductAttribute("PluginLib")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PluginLib")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

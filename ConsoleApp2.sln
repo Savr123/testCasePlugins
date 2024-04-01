@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34701.34
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp2", "ConsoleApp2\ConsoleApp2.csproj", "{1E4B539A-893C-4221-9D14-CE40A3E9A13E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PluginLib", "PluginLib\PluginLib.csproj", "{09AA7702-4E27-470B-AC9C-DCD37F487FFF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PluginUser", "PluginUser\PluginUser.csproj", "{6CF93AB9-DEA5-4618-9E06-BB5F92C09F13}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{1E4B539A-893C-4221-9D14-CE40A3E9A13E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1E4B539A-893C-4221-9D14-CE40A3E9A13E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1E4B539A-893C-4221-9D14-CE40A3E9A13E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1E4B539A-893C-4221-9D14-CE40A3E9A13E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09AA7702-4E27-470B-AC9C-DCD37F487FFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09AA7702-4E27-470B-AC9C-DCD37F487FFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09AA7702-4E27-470B-AC9C-DCD37F487FFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09AA7702-4E27-470B-AC9C-DCD37F487FFF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6CF93AB9-DEA5-4618-9E06-BB5F92C09F13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6CF93AB9-DEA5-4618-9E06-BB5F92C09F13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6CF93AB9-DEA5-4618-9E06-BB5F92C09F13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6CF93AB9-DEA5-4618-9E06-BB5F92C09F13}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

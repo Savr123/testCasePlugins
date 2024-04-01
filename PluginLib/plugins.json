@@ -1,0 +1,32 @@
+[
+  {
+    "PluginName": "MultiplyPlugin",
+    "Version": "1.0",
+    "Image": null,
+    "Description": "Multiplying two numbers"
+  },
+  {
+    "PluginName": "SumPlugin",
+    "Version": "1.0",
+    "Image": null,
+    "Description": "Sum two numbers"
+  },
+  {
+    "PluginName": "SubstractPlugin",
+    "Version": "1.0",
+    "Image": null,
+    "Description": "Substract two numbers"
+  },
+  {
+    "PluginName": "DividePlugin",
+    "Version": "1.0",
+    "Image": null,
+    "Description": "Divide two numbers"
+  },
+  {
+    "PluginName": "IncrementPlugin",
+    "Version": "1.0",
+    "Image": null,
+    "Description": "Increment number by 1"
+  }
+]
